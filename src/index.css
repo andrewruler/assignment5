@@ -1,0 +1,147 @@
+/* Reset Default Browser Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Set Global Font and Background */
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  
+  /* Anchor Tags */
+  a {
+    text-decoration: none;
+    color: #007bff;
+    transition: color 0.3s;
+  }
+  
+  a:hover {
+    color: #0056b3;
+  }
+  
+  /* Headings */
+  h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 1rem;
+    color: #222;
+  }
+  
+  /* Paragraphs */
+  p {
+    margin-bottom: 1rem;
+  }
+  
+  /* Images */
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  /* Buttons */
+  button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  button:active {
+    transform: scale(0.98);
+  }
+  
+  /* Forms */
+  input, textarea, select {
+    width: 100%;
+    padding: 10px;
+    margin: 0.5rem 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  
+  /* Containers */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px;
+  }
+  
+  /* Flex Utilities */
+  .flex {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .flex-column {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Grid System */
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -10px;
+  }
+  
+  .col {
+    flex: 1;
+    padding: 10px;
+  }
+  
+  .col-2 {
+    flex: 0 0 50%;
+  }
+  
+  .col-3 {
+    flex: 0 0 33.33%;
+  }
+  
+  .col-4 {
+    flex: 0 0 25%;
+  }
+  
+  /* Footer */
+  footer {
+    background-color: #282c34;
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+  }
+  
+  /* Media Queries */
+  @media (max-width: 768px) {
+    .row {
+      flex-direction: column;
+    }
+  
+    .col, .col-2, .col-3, .col-4 {
+      flex: 0 0 100%;
+    }
+  }
+  
