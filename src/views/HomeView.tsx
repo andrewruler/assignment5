@@ -1,13 +1,13 @@
 import Header from '../components/Header';
 import Hero from '../components/Hero';
-import Chatbot from '../components/Chatbot';
 import Footer from '../components/Footer';
+import Feature from "../components/Feature"
 function HomeView(){
     return (
         <>
             <Header></Header>
             <Hero></Hero>
-            <Chatbot></Chatbot>
+            <Feature></Feature>
             <Footer></Footer>
         </>
     )

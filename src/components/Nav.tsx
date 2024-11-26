@@ -1,4 +1,8 @@
-function nav () {
+import './components.css'
+import ReactDOM from 'react-dom/client';
+import {Routes, Route, Link} from 'react-router-dom';
+
+function Nav () {
 
     return (
     <nav>
@@ -23,4 +27,4 @@ function nav () {
     )
 }
 
-export default nav;
+export default Nav;
