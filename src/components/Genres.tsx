@@ -1,61 +1,64 @@
 import "./Genres.css";
-import axios from 'axios';
-import {useEffect, useState} from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
-function Genres (){
-    const[movies, setMovies] = useState([]);
-    
-    useEffect(() => {
-        {async function getMoviesData(){
-            const response = await axios.get(`{}`)
-        }}
-    })
+function Genres(props) {
+  const [movies, setMovies] = useState([]);
+  const [movieDetails, setMovieDetails] = useState({});
 
+  const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
+  const genreId = props.genreId;
 
+  useEffect(() => {
+    (async function getMoviesData() {
+      const url = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=${genreId}`;
+      await axios
+        .get(url)
+        .then((response) => {
+          setMovies(response.data.results);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    })();
+  }, [genreId, API_KEY]);
 
-
-
-
-
-
-
-
-
-
-
-
-    const genreArray = [
-        {genre:"Action", id:28},
-        {genre:"Animation", id:16},
-        {genre:"Comedy", id:35},
-        {genre:"Adventure", id:12},
-        {genre:"Crime", id:80},
-        {genre:"Documentary", id:99},
-        {genre:"Drama", id:18},
-        {genre:"Family", id:10751},
-        {genre:"Fantasy", id:14},
-        {genre:"History", id:36},
-        {genre:"Horror", id:27},
-        {genre:"Music", id:10402},
-        {genre:"Mystery", id:9648},
-        {genre:"Romance", id:10749},
-        {genre:"Science Fiction", id:878},
-        {genre:"TV Movie", id:10770},
-        {genre:"Thriller", id:53},
-        {genre:"War", id:10752},
-        {genre:"Western", id:37}
-    ];
-
-    return (
-        <>
-            <div>
-                <ul>
-                    {genreArray.map((item) => (
-                        <li>{item.genre}</li>
-                    ))}
-                </ul>
-            </div>
-        </>
-    )
+  async function getMoviesData() {
+    const url = `https://api.themoviedb.org/3/movie/${movie.id}?api_key=${API_KEY}`;
+    const response = await axios.get(url);
+    setMovieDetails(response.data);
+  }
+  return (
+    <>
+      <div className="movies-container">
+        <div className="movies-list">
+          <ul>
+            {movies.map((movie) => (
+              <div key={movie.id}>
+                <li key={movie.id}>{movie.title}</li>
+                <img
+                  src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                  alt={movie.title}
+                ></img>
+                <a onClick={() => getMoviesData()}>More Details</a>
+              </div>
+            ))}
+          </ul>
+        </div>
+        {movieDetails && (
+          <div className="menu-details">
+            <h1>{movieDetails.title}</h1>
+            <img
+              src={`https://image.tmdb.org/t/p/w300${movieDetails.poster_path}`}
+              alt={movieDetails.title}
+            />
+            <p>{movieDetails.overview}</p>
+            <p>Release Date: {movieDetails.release_date}</p>
+            <p>Rating: {movieDetails.vote_average}</p>
+          </div>
+        )}
+      </div>
+    </>
+  );
 }
 export default Genres;

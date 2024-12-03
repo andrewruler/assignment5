@@ -8,6 +8,7 @@ function App() {
      <Router>
        <Routes>
          <Route path="/" element={<HomeView />} />
+         <Route path='genres/:genreId' element={<HomeView />} />
        </Routes>
      </Router>
     </>
