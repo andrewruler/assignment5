@@ -23,7 +23,7 @@ function Genres(props) {
     })();
   }, [genreId, API_KEY]);
 
-  async function getMoviesData() {
+  async function getMoviesDetails(movie) {
     const url = `https://api.themoviedb.org/3/movie/${movie.id}?api_key=${API_KEY}`;
     const response = await axios.get(url);
     setMovieDetails(response.data);
@@ -35,12 +35,12 @@ function Genres(props) {
           <ul>
             {movies.map((movie) => (
               <div key={movie.id}>
-                <li key={movie.id}>{movie.title}</li>
+                <li>{movie.title}</li>
                 <img
                   src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
                   alt={movie.title}
                 ></img>
-                <a onClick={() => getMoviesData()}>More Details</a>
+                <button onClick={() => getMoviesDetails(movie)}>More Details</button>
               </div>
             ))}
           </ul>
