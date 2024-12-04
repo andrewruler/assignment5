@@ -1,21 +1,57 @@
-import './components.css'
-function Feature(){
-    return (
-    <div className="trending">
-        <h1>Trending</h1>
-        <div className="trending-list">
-            <img src="https://github.com/andrewruler/Cineflix/blob/main/images/trending1.png" alt="trending1"className="trending1"></img>
-            <img src="https://github.com/andrewruler/Cineflix/blob/main/images/trending2.png" alt="trending2"className="trending2"></img>
-            <img src="https://github.com/andrewruler/Cineflix/blob/main/images/trending3.png" alt="trending3"className="trending3"></img>
-            <img src="https://github.com/andrewruler/Cineflix/blob/main/images/trending4.png" alt="trending4"className="trending4"></img>
-            <img src="https://github.com/andrewruler/Cineflix/blob/main/images/trending5.png" alt="trending5"className="trending5"></img>
-            <img src="https://github.com/andrewruler/Cineflix/blob/main/images/trending6.png" alt="trending6"className="trending6"></img>
-            <img src="https://github.com/andrewruler/Cineflix/blob/main/images/trending7.png" alt="trending7"className="trending7"></img>
-            <img src="https://github.com/andrewruler/Cineflix/blob/main/images/trending8.png" alt="trending8"className="trending8"></img>
-            <img src="https://github.com/andrewruler/Cineflix/blob/main/images/trending9.png" alt="trending9"className="trending9"></img>
-            <img src="https://github.com/andrewruler/Cineflix/blob/main/images/trending10.png" alt="trending10"className="trending10"></img>
+import { Link } from "react-router-dom";
+import "./Feature.css";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
+function Feature() {
+  const [movies, setMovies] = useState([]);
+
+  function shuffleArray<T>(array: T[]): T[] {
+    let shuffledArray = [...array];
+    for (let i = shuffledArray.length - 1; i > 0; i--) {
+      const randomIndex = Math.floor(Math.random() * (i + 1));
+      [shuffledArray[i], shuffledArray[randomIndex]] = [
+        shuffledArray[randomIndex],
+        shuffledArray[i],
+      ];
+    }
+    return shuffledArray;
+  }
+
+  useEffect(() => {
+    async function getMovies() {
+      const response = await axios.get(
+        `https://api.themoviedb.org/3/movie/now_playing?api_key=${import.meta.env.VITE_TMDB_API_KEY}`
+      );
+      const shuffledMovies = shuffleArray(response.data.results);
+      const featuredMovies = [
+        shuffledMovies.pop(),
+        shuffledMovies.pop(),
+        shuffledMovies.pop(),
+      ];
+      setMovies(featuredMovies);
+    }
+    getMovies();
+  }, []);
+
+  return (
+    <>
+      <div className="hero">
+        <div>
+          {movies.map((movie) => (
+            <div key={movie.id} className="movie-card">
+              <Link to={`/movies/${movie.id}`}>
+                <img
+                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                  alt={movie.title}
+                  className="movie-poster"
+                />
+              </Link>
+            </div>
+          ))}
         </div>
-    </div>
-    )
+      </div>
+    </>
+  );
 }
 export default Feature;
