@@ -1,11 +1,5 @@
-import GenreView from "./GenreView";
-import Nav from "../components/Nav";
-import Genres from '../components/Genres';
-import Footer from '../components/Footer';
-
-function MoviesView() {
-
-    const genreList = [
+function newGenres() {
+    const genres = [
         { name: "Action", id: 28 },
         { name: "Horror", id: 27 },
         { name: "TV", id: 10770 },
@@ -19,15 +13,7 @@ function MoviesView() {
         { name: "Mystery", id: 9648 },
         { name: "War", id: 10752 }
     ];
-
-  return (
-    <>
-        <Nav />
-        {Genres({genreList})}
-        <GenreView />
-        <Footer/>
-    </>
-  )
+    return (
+       
+    )
 }
-
-export default MoviesView

@@ -41,21 +41,18 @@ function GenreView() {
 
   return (
     <>
-      <Genres onGenreClick = {(/>
-    </>
       <div className="movies-container">
-          <div className="movies-list">
-            <ul>
-              {movies.map((movie) => (
-                <div key={movie.id}>
-                  <li>{movie.title}</li>
-                  <img
-                    src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-                    alt={movie.title}
-                  ></img>
-                  <button onClick={() => getMoviesDetails(movie)}>More Details</button>
-                </div>
-              ))}
+        {movies.map((movie) => (
+          <div key={movie.id}>
+            <li>{movie.title}</li>
+            <img
+              src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+              alt={movie.title}
+            ></img>
+            <button onClick={() => getMoviesDetails(movie)}>More Details</button>
+          </div>
+        ))}
+        </div>
             </ul>
           </div>
           {movieDetails && (
