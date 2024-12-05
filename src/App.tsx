@@ -3,21 +3,28 @@ import GenreView from "./views/GenreView";
 import RegisterView from "./views/RegisterView";
 import LoginView from "./views/LoginView";
 import MovieView from "./views/MoviesView";
+import DetailView from './views/DetailView';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { AppProvider } from "./contexts/AppContext";
+
 function App() {
   return (
     <>
-      <Router>
-        <Routes>
-          <Route path="/" element={<HomeView />} />
-          <Route path="HomeView" element={<HomeView />}/>
-          <Route path ="MoviesView" element={<MovieView />}>
-            <Route path="GenreView" element={<GenreView />} />
-          </Route>
-          <Route path="RegisterView" element={<RegisterView />} />
-          <Route path="LoginView" element={<LoginView />} />
-        </Routes>
-      </Router>
+      <AppProvider>
+        <Router>
+          <Routes>
+            <Route path="/" element={<HomeView />} />
+            <Route path="Home" element={<HomeView />} />
+            <Route path="Movies" element={<MovieView />}>
+              <Route path="Genres" element={<GenreView />} />
+              <Route path="Genres/:genreId" element={<GenreView />} /> 
+              <Route path="Detail/:movieId" element={<DetailView />} /> 
+            </Route>
+            <Route path="Register" element={<RegisterView />} />
+            <Route path="Login" element={<LoginView />} />
+          </Routes>
+        </Router>
+      </AppProvider>
     </>
   );
 }

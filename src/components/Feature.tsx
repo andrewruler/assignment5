@@ -35,23 +35,22 @@ function Feature() {
   }, []);
 
   return (
-    <>
-      <div className="hero">
-        <div>
-          {movies.map((movie) => (
-            <div key={movie.id} className="movie-card">
-              <Link to={`/movies/${movie.id}`}>
-                <img
-                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                  alt={movie.title}
-                  className="movie-poster"
-                />
-              </Link>
-            </div>
-          ))}
-        </div>
+    <div className="hero">
+      <div className="movie-cards-container">
+        {movies.map((movie) => (
+          <div key={movie.id} className="movie-card">
+            <Link to={`/movies/Detail/${movie.id}`}>
+              <img
+                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                alt={movie.title}
+                className="movie-poster"
+              />
+            </Link>
+          </div>
+        ))}
       </div>
-    </>
+    </div>
   );
 }
+
 export default Feature;

@@ -11,24 +11,26 @@ function Movies(props) {
 
   useEffect(() => {
     (async function getMoviesData() {
-      const url = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_Movies=${genreId}`;
-      await axios
-        .get(url)
-        .then((response) => {
-          setMovies(response.data.results);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-        console.log(movies);
+      const url = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=${genreId}`;
+      try {
+        const response = await axios.get(url);
+        setMovies(response.data.results);
+      } catch (error) {
+        console.log(error);
+      }
     })();
   }, [genreId, API_KEY]);
 
-  async function getMoviesDetails(movie) {
+  async function getMovieDetails(movie) {
     const url = `https://api.themoviedb.org/3/movie/${movie.id}?api_key=${API_KEY}`;
-    const response = await axios.get(url);
-    setMovieDetails(response.data);
+    try {
+      const response = await axios.get(url);
+      setMovieDetails(response.data);
+    } catch (error) {
+      console.log(error);
+    }
   }
+
   return (
     <>
       <div className="movies-container">
@@ -40,8 +42,8 @@ function Movies(props) {
                 <img
                   src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
                   alt={movie.title}
-                ></img>
-                <button onClick={() => getMoviesDetails(movie)}>More Details</button>
+                />
+                <button onClick={() => getMovieDetails(movie)}>More Details</button>
               </div>
             ))}
           </ul>
@@ -62,4 +64,5 @@ function Movies(props) {
     </>
   );
 }
+
 export default Movies;
